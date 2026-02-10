@@ -38,17 +38,15 @@
         }
         .dark-mode .header { background: #1e1e1e; border-bottom-color: #4caf50; }
 
-        .h-right { font-family: 'Amiri', serif; font-weight: bold; color: #2e7d32; font-size: 14px; white-space: nowrap; }
+        .h-right { font-family: 'Amiri', serif; font-weight: bold; color: #2e7d32; font-size: 20px; white-space: nowrap; }
         .dark-mode .h-right { color: #4caf50; }
 
-        .h-news { overflow: hidden; border-right: 1px solid #ddd; padding-right: 15px; max-width: 100%; }
-        #news-link { 
-            text-decoration: none; color: #555; font-size: 13px; display: block; 
-            white-space: normal; line-height: 1.2; max-height: 32px; overflow: hidden;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-        }
-        .dark-mode #news-link { color: #bbb; }
-        .source-tag { color: #d32f2f; font-weight: bold; }
+        /* بەشی نوێ بۆ دوگمەکانی شوێنی هەواڵ */
+        .h-buttons-area { display: flex; gap: 10px; border-right: 1px solid #ddd; padding-right: 15px; align-items: center; }
+        .btn-nav { font-size: 12px; font-weight: bold; cursor: pointer; padding: 6px 12px; border-radius: 6px; color: white; border: none; transition: 0.3s; }
+        .btn-nav-font { background: #ccc !important; }
+        .btn-nav-c4k { background: #ccc !important; }
+        .btn-nav:hover { opacity: 0.8; transform: translateY(-1px); }
 
         .h-center { text-align: center; display: flex; flex-direction: column; justify-content: center; padding: 0 10px; }
         .h-center h1 { font-family: 'Amiri', serif; font-size: 1.2rem; color: #2e7d32; margin: 0; line-height: 1; }
@@ -92,6 +90,16 @@
         .modal-body { font-size: 15px; }
         .modal-footer { margin-top: 20px; text-align: left; }
         .close-btn { background: #2e7d32; padding: 8px 20px; border-radius: 5px; color: white; border: none; cursor: pointer; }
+
+        /* ستایلی دوگمەکانی ناو مۆدێڵ */
+        .btn-download-pro, .btn-download-c4k {
+            text-decoration: none; display: inline-block; padding: 12px 25px; font-size: 16px; font-weight: bold; color: #ffffff !important; border-radius: 8px; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-top: 10px;
+        }
+        .btn-download-pro { background-color: #2ea44f; }
+        .btn-download-pro:hover { transform: translateY(-3px); background-color: #2c974b; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
+        .btn-download-c4k { background-color: #f39c12; }
+        .btn-download-c4k:hover { transform: translateY(-3px); background-color: #e67e22; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
+        .file-info { font-size: 12px; color: #777; margin-top: 8px; display: block; }
     </style>
 </head>
 <body onload="initApp()">
@@ -101,12 +109,13 @@
             <div class="modal-header">دەربارەی پڕۆژە</div>
             <div class="modal-body">
                 <p><strong>ناوی گەشەپێدەر:</strong> ئه‌ركان دارا </p>
-                <p><strong>وەشانی پڕۆژەکە:</strong> 1.4</p>
+                <p><strong>وەشانی پڕۆژەکە:</strong> 1.5</p>
                 <p><strong> دروستکردن:</strong> 2026</p>
                 <p><strong>مافی كۆپیكردن:</strong> پارێزراوه‌</p>
-                <hr style="margin: 15px 0; opacity: 0.2;">
-                <p><strong>زانیاری لەسەر بەشەکان:</strong></p>
-                <p>به‌شه‌ زیندووه‌كانی پڕۆژه‌كه، وه‌ك مانشێتی هه‌واڵه‌كان، كات و به‌روار، نرخه‌كان، خۆیان نوێ ده‌بنه‌وە و له‌ سه‌رچاوه‌ و بۆرسه‌ متمانه‌ پێكراوه‌كانه‌وه‌ وه‌رگیراون...</p>
+                <hr style="margin: 5px 0; opacity: 1.7;">
+                <p><strong>زانیاری و ئاگاداری:</strong></p>
+                <p>به‌شه‌ زیندووه‌كانی پڕۆژه‌كه، وه‌ك كات و به‌روار، نرخه‌كان، خۆیان نوێ ده‌بنه‌وە و له‌ سه‌رچاوه‌ و بۆرسه‌ متمانه‌ پێكراوه‌كانه‌وه‌ وه‌رگیراون،
+هه‌روه‌ها هه‌ندێك فایلی PDF هه‌ن له‌ بنه‌ڕه‌تدا به‌ سكانی وێنه‌یی دروستكراون، نه‌ك تێكست، ئه‌و فایلانه‌ ناخوێندرێنه‌وه‌، ان شاء الله‌ بۆ وه‌شانه‌كانی داهاتوو كاریان له‌سه‌ر ئه‌كه‌ین...</p>
             </div>
             <div class="modal-footer">
                 <button class="close-btn" onclick="toggleAbout()">داخستن</button>
@@ -114,10 +123,45 @@
         </div>
     </div>
 
+    <div id="fontModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">🎁 فۆنت: نزیكه‌ی هه‌زار فۆنت به‌ كلیكێك دابه‌زێنه‌</div>
+            <div class="modal-body" style="text-align: center;">
+                <p>دەتوانیت باشترین کۆمەڵە فۆنتی کوردی (عەلی، یونیکۆد، گرافیک) بە یەک فایل دابەزێنیت.</p>
+                <br>
+                <a href="https://github.com/arkanndara-art/fc/releases/download/V.1/829.Font.zip" target="_blank" class="btn-download-pro">⬇️ داگرتنی پاکێجەکە (829 فۆنت)</a>
+                <span class="file-info">قەبارەی فایل: ~45MB | جۆر: ZIP</span>
+                <p style="font-size: 13px; color: #555; margin-top: 15px;">
+                    💡 <b>ڕێنمایی:</b> دوای داگرتن، فایلەکە بکەرەوە (Extract) و هەموو فۆنتەکان دیاری بکە و کلیکی ڕاست بکە و <b>Install</b> لێ بدە.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="close-btn" onclick="toggleFontModal()">داخستن</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="c4kModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">✨ دابەزاندنی پاکێج و کەرەستەکانی C4Kurdi</div>
+            <div class="modal-body" style="text-align: center;">
+                <p>هەموو ئەو کەرەستە و فایلە تایبەتانەی بۆ دیزاین و پڕۆژەکانت لە C4Kurdi پێویستتە لێرە دەستت دەکەوێت.</p>
+                <br>
+                <a href="لێرە_لینکەکە_دابنێ" target="_blank" class="btn-download-c4k">⬇️ داگرتنی پاکێجی C4Kurdi</a>
+                <span class="file-info">جۆر: ZIP | وەشانی نوێ</span>
+                <p style="font-size: 13px; color: #555; margin-top: 15px;">🚀 <b>تێبینی:</b> ئەم پاکێجە بۆ کارئاسانی ئێوە ئامادەکراوە.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="close-btn" onclick="toggleC4kModal()">داخستن</button>
+            </div>
+        </div>
+    </div>
+
     <div class="header">
         <div class="h-right" id="clock">...</div>
-        <div class="h-news">
-            <a id="news-link" href="#" target="_blank">لۆدکردنی هەواڵەکان...</a>
+        <div class="h-buttons-area">
+            <button class="btn-nav btn-nav-font" onclick="toggleFontModal()">🎁 دابه‌زاندنی فۆنت</button>
+            <button class="btn-nav btn-nav-c4k" onclick="toggleC4kModal()">✨ کەرەستەی C4Kurdi</button>
         </div>
         <div class="h-center">
             <h1>وەرگێڕی فۆنت و فایل</h1>
@@ -207,7 +251,7 @@ document.getElementById('fileInput').addEventListener('change', function(e) {
     }
 });
 
-// --- وەرگێڕی فۆنت (لۆجیکی تێکەڵکراو لەگەڵ لۆجیکی کۆنی 2012) ---
+// --- وەرگێڕی فۆنت ---
 const conversionMap = [
     { uni: 'ڵا', ali: 'لآ' }, { uni: 'ڵا', ali: 'ڵا' },
     { uni: 'ێ', ali: 'يَ' }, { uni: 'ێ', ali: 'ێ' },
@@ -216,90 +260,24 @@ const conversionMap = [
     { uni: 'ڕ', ali: 'رِ' }, { uni: 'ڕ', ali: 'ڕ' },
     { uni: 'پ', ali: 'ث' }, { uni: 'چ', ali: 'ض' }, 
     { uni: 'ژ', ali: 'ذ' }, { uni: 'ڤ', ali: 'ظ' }, 
-    { uni: 'گ', ali: 'ط' }, { uni: 'ه‌', ali: 'ة' },  { uni: 'ە', ali: 'ه‌' },   { ali: 'ة', uni: 'ه‌' },
+    { uni: 'گ', ali: 'ط' }, { uni: 'ه‌', ali: 'ة' },  { uni: 'ە', ali: 'ه‌' },    { ali: 'ة', uni: 'ه‌' },
     { uni: 'ی', ali: 'ي' }, { uni: 'ک', ali: 'ك' },
-    // پاشکۆی لۆجیکی کۆن بۆ حاڵەتە تایبەتەکان
     { uni: 'وو', ali: 'و‌و' },
 ];
 
 function convert(type) {
     let box = document.getElementById("textBox");
     let text = box.value;
-
     if (type === 'toAli') {
-        conversionMap.forEach(item => {
-            text = text.split(item.uni).join(item.ali);
-        });
+        conversionMap.forEach(item => { text = text.split(item.uni).join(item.ali); });
         box.style.fontFamily = "Ali_K_Ali, 'Ali_K_Standard'";
     } else {
-        // لۆجیکی وەرگێڕان بۆ یونیکۆد (Fallback Logic لێرەدایە)
-        conversionMap.forEach(item => {
-            text = text.split(item.ali).join(item.uni);
-        });
+        conversionMap.forEach(item => { text = text.split(item.ali).join(item.uni); });
         box.style.fontFamily = document.getElementById('fontSelect').value;
     }
-
     box.value = text;
     updateStats();
     showStatus(type === 'toUni' ? "✅ کرا بە یونیکۆد" : "🔃 کرا بە عەلی کەی");
-}
-
-// --- هەواڵەکان (چاککراو بەپێی داواکاریت) ---
-let newsList = [];
-let nIdx = 0;
-
-async function getNews() {
-    const urls = [
-        {n:'کاناڵی هەشت', u:'https://channel8.com/rss/sorani'},
-        {n:'الجزیرة', u:'https://www.aljazeera.net/rss'},
-        {n:'SkyNews', u:'https://www.skynewsarabia.com/rss.xml'},
-        {n:'RT Arabic', u:'https://arabic.rt.com/rss/'},
-        {n:'سەباح (INA)', u:'https://www.ina.iq/rss.xml'}
-    ];
-    
-    let tempSources = [];
-    const results = await Promise.allSettled(urls.map(async (s) => {
-        try {
-            const r = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(s.u)}&t=${Date.now()}`);
-            const d = await r.json();
-            if (d.status === 'ok' && d.items && d.items.length > 0) {
-                return d.items.slice(0, 5).map(i => ({t: i.title, l: i.link, s: s.n}));
-            }
-        } catch(e) {}
-        return null;
-    }));
-
-    results.forEach(result => {
-        if (result.status === 'fulfilled' && result.value) tempSources.push(result.value);
-    });
-
-    let newFetchedList = [];
-    for (let i = 0; i < 5; i++) {
-        tempSources.forEach(source => {
-            if (source[i]) newFetchedList.push(source[i]);
-        });
-    }
-
-    if (newFetchedList.length > 0) {
-        newsList = newFetchedList;
-        nIdx = 0; 
-        showNextNews(); 
-    }
-}
-
-function showNextNews() {
-    const el = document.getElementById('news-link');
-    if (!el || newsList.length === 0) return;
-    el.style.opacity = 0;
-    setTimeout(() => {
-        const currentNews = newsList[nIdx];
-        // یەکخستنی پیتەکان بۆ فۆنتی کوردی (لۆجیکی وەرگێڕی کۆن)
-        let cleanTitle = currentNews.t.replace(/ي/g, 'ی').replace(/ك/g, 'ک');
-        el.innerHTML = `<span style="color:#d32f2f; font-weight:bold;">${currentNews.s}:</span> ${cleanTitle}`;
-        el.href = currentNews.l;
-        el.style.opacity = 1;
-        nIdx = (nIdx + 1) % newsList.length;
-    }, 300);
 }
 
 // --- ستایل و خزمەتگوزارییەکان ---
@@ -360,10 +338,6 @@ function initApp() {
         document.getElementById('clock').innerText = `${days[n.getDay()]} ${n.toLocaleTimeString('en-GB',{hour12:false})}`;
     }, 1000);
 
-    getNews();
-    setInterval(showNextNews, 5000); 
-    setInterval(getNews, 1800000); 
-
     updateWeather();
     setInterval(updateWeather, 1800000);
 
@@ -372,13 +346,25 @@ function initApp() {
 
     document.addEventListener('selectionchange', updateStats);
     window.onclick = function(event) {
-        const modal = document.getElementById("aboutModal");
-        if (event.target == modal) modal.style.display = "none";
+        const aboutModal = document.getElementById("aboutModal");
+        const fontModal = document.getElementById("fontModal");
+        const c4kModal = document.getElementById("c4kModal");
+        if (event.target == aboutModal) aboutModal.style.display = "none";
+        if (event.target == fontModal) fontModal.style.display = "none";
+        if (event.target == c4kModal) c4kModal.style.display = "none";
     }
 }
 
 function toggleAbout() {
     const modal = document.getElementById("aboutModal");
+    modal.style.display = (modal.style.display === "block") ? "none" : "block";
+}
+function toggleFontModal() {
+    const modal = document.getElementById("fontModal");
+    modal.style.display = (modal.style.display === "block") ? "none" : "block";
+}
+function toggleC4kModal() {
+    const modal = document.getElementById("c4kModal");
     modal.style.display = (modal.style.display === "block") ? "none" : "block";
 }
 function toggleM() { document.getElementById("mDrop").classList.toggle("show"); }
@@ -395,7 +381,14 @@ function copyText() {
         });
     }
 }
-function clearText() { if(confirm("سڕینەوە؟")) { document.getElementById("textBox").value=""; updateStats(); } }
+function clearText() { 
+    const textBox = document.getElementById("textBox");
+    if (textBox.value !== "") {
+        textBox.value = ""; 
+        updateStats(); 
+        showStatus("🗑️ دەقەکە بە سەرکەوتوویی سڕایەوە");
+    }
+}
 </script>
 </body>
 </html>
