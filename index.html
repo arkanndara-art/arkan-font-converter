@@ -7,7 +7,7 @@
 
 <title>وەرگێڕی فۆنت و فایل | Ali K to Unicode | PDF Converter</title>
     
-    <meta name="description" content="گۆڕینی فۆنتی عەلی بۆ یونیکۆد (Ali K to Unicode)، خوێندنەوەی فایلی PDF و Word بە کوردی،  نرخی دراو و زێڕ و هەواڵەکان بەشێوەی راستەوخۆ.">
+    <meta name="description" content="گۆڕینی فۆنتی عەلی بۆ یونیکۆد (Ali K to Unicode), خوێندنەوەی فایلی PDF و Word بە کوردی,  نرخی دراو و زێڕ و هەواڵەکان بەشێوەی راستەوخۆ.">
     
     <meta name="keywords" content="وەرگێڕی فۆنت, گۆڕینی فۆنت, عەلی کەی, Ali K to Unicode, PDF to Text, کورد ئایتی, گۆڕینی کیبۆرد, وه‌رگێڕی ئه‌ركان, Arkan Dara, Font Converter Kurdish">
     
@@ -42,7 +42,12 @@
         .dark-mode .h-right { color: #4caf50; }
 
         /* بەشی نوێ بۆ دوگمەکانی شوێنی هەواڵ */
-        .h-buttons-area { display: flex; gap: 10px; border-right: 1px solid #ddd; padding-right: 15px; align-items: center; }
+        .h-buttons-area { display: flex; 
+    gap: 10px; 
+    border-right: 1px solid #ddd; 
+    padding-right: 15px; 
+    margin-right: 25px; /* ئەم هێڵە زیاد بکە بۆ دوورخستنەوەی لە کاتەکە */
+    align-items: center; }
         .btn-nav { font-size: 12px; font-weight: bold; cursor: pointer; padding: 6px 12px; border-radius: 6px; color: white; border: none; transition: 0.3s; }
         .btn-nav-font { background: #ccc !important; }
         .btn-nav-c4k { background: #ccc !important; }
@@ -100,6 +105,19 @@
         .btn-download-c4k { background-color: #f39c12; }
         .btn-download-c4k:hover { transform: translateY(-3px); background-color: #e67e22; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
         .file-info { font-size: 12px; color: #777; margin-top: 8px; display: block; }
+#clock { 
+    cursor: pointer; 
+    transition: 0.3s; 
+    padding: 0 15px; 
+    border-radius: 5px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    align-self: stretch; 
+    white-space: nowrap;  /* ڕێگری دەکات لەوەی کاتەکە و ڕۆژەکە ببن بە دوو دێڕ */
+    min-width: fit-content; /* وادەکات بەقەدەر درێژی کاتەکە پان ببێتەوە */
+}        #clock:hover { background: rgba(46, 125, 50, 0.1); }
+        .dark-mode #dateArea { background: #252525; color: #ddd; }
     </style>
 </head>
 <body onload="initApp()">
@@ -109,13 +127,13 @@
             <div class="modal-header">دەربارەی پڕۆژە</div>
             <div class="modal-body">
                 <p><strong>ناوی گەشەپێدەر:</strong> ئه‌ركان دارا </p>
-                <p><strong>وەشانی پڕۆژەکە:</strong> 1.5</p>
+                <p><strong>وەشانی پڕۆژەکە:</strong> 1.6</p>
                 <p><strong> دروستکردن:</strong> 2026</p>
                 <p><strong>مافی كۆپیكردن:</strong> پارێزراوه‌</p>
                 <hr style="margin: 5px 0; opacity: 1.7;">
                 <p><strong>زانیاری و ئاگاداری:</strong></p>
-                <p>به‌شه‌ زیندووه‌كانی پڕۆژه‌كه، وه‌ك كات و به‌روار، نرخه‌كان، خۆیان نوێ ده‌بنه‌وە و له‌ سه‌رچاوه‌ و بۆرسه‌ متمانه‌ پێكراوه‌كانه‌وه‌ وه‌رگیراون،
-هه‌روه‌ها هه‌ندێك فایلی PDF هه‌ن له‌ بنه‌ڕه‌تدا به‌ سكانی وێنه‌یی دروستكراون، نه‌ك تێكست، ئه‌و فایلانه‌ ناخوێندرێنه‌وه‌، ان شاء الله‌ بۆ وه‌شانه‌كانی داهاتوو كاریان له‌سه‌ر ئه‌كه‌ین...</p>
+                <p> نرخه‌كان كه‌ نوێبوونه‌وه‌ خۆیان دێنه‌ سه‌ر شاشه‌، كلیك له‌سه‌ر كاته‌كه‌ش بكه‌ ئه‌توانی كات دابنێی، هه‌روه‌ها له‌سه‌ر دوگمه‌ی فایلیش 
+ هه‌ندێك فایلی PDF هه‌ن له‌ بنه‌ڕه‌تدا به‌ سكانی وێنه‌یی دروستكراون، نه‌ك تێكست، ئه‌و فایلانه‌ ناخوێندرێنه‌وه‌...</p>
             </div>
             <div class="modal-footer">
                 <button class="close-btn" onclick="toggleAbout()">داخستن</button>
@@ -125,11 +143,11 @@
 
     <div id="fontModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">🎁 فۆنت: نزیكه‌ی هه‌زار فۆنت به‌ كلیكێك دابه‌زێنه‌</div>
+            <div class="modal-header">🎁 فۆنت: نزیكه‌ی 900 فۆنت به‌ كلیكێك دابه‌زێنه‌</div>
             <div class="modal-body" style="text-align: center;">
                 <p>دەتوانیت باشترین کۆمەڵە فۆنتی کوردی (عەلی، یونیکۆد، گرافیک) بە یەک فایل دابەزێنیت.</p>
                 <br>
-                <a href="https://github.com/arkanndara-art/fc/releases/download/V.1/829.Font.zip" target="_blank" class="btn-download-pro">⬇️ داگرتنی پاکێجەکە (829 فۆنت)</a>
+                <a href="https://github.com/arkanndara-art/fc/releases/download/V.1/829.Font.zip" target="_blank" class="btn-download-pro">⬇️ داگرتن </a>
                 <span class="file-info">قەبارەی فایل: ~45MB | جۆر: ZIP</span>
                 <p style="font-size: 13px; color: #555; margin-top: 15px;">
                     💡 <b>ڕێنمایی:</b> دوای داگرتن، فایلەکە بکەرەوە (Extract) و هەموو فۆنتەکان دیاری بکە و کلیکی ڕاست بکە و <b>Install</b> لێ بدە.
@@ -143,19 +161,45 @@
 
     <div id="c4kModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">✨ دابەزاندنی پاکێج و کەرەستەکانی C4Kurdi</div>
+            <div class="modal-header">✨ دابەزاندنی پاکێج  C4Kurdi</div>
             <div class="modal-body" style="text-align: center;">
                 <p>هەموو ئەو کەرەستە و فایلە تایبەتانەی بۆ دیزاین و پڕۆژەکانت لە C4Kurdi پێویستتە لێرە دەستت دەکەوێت.</p>
                 <br>
                 <a href="https://github.com/arkanndara-art/fc/releases/tag/v2.c4kurd" target="_blank" class="btn-download-c4k">⬇️ داگرتنی پاکێجی C4Kurdi</a>
                 <span class="file-info">جۆر: ZIP | وەشانی نوێ</span>
-                <p style="font-size: 13px; color: #555; margin-top: 15px;">🚀 <b>تێبینی:</b> ئەم پاکێجە بۆ کارئاسانی ئێوە ئامادەکراوە.</p>
+                <p style="font-size: 13px; color: #555; margin-top: 15px;">🚀 <b>تێبینی:</b> كه‌ فایله‌كه‌ دابه‌زی، دواتر زیپه‌كه‌ بكه‌ره‌وه‌ و Extractبكه‌ و دواتر Install دابگره‌.</p>
             </div>
             <div class="modal-footer">
                 <button class="close-btn" onclick="toggleC4kModal()">داخستن</button>
             </div>
         </div>
     </div>
+
+<div id="timeModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">بەروار و دیاریكردنی كات </div>
+        <div class="modal-body" style="text-align: center;">
+            <div id="dateArea" style="line-height: 2; margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 8px; color: #333;">
+                <div id="gregorianDate"></div>
+                <div id="islamicDate"></div>
+            </div>
+            
+            <div id="timerDisplay" style="font-size: 40px; font-weight: bold; color: #2e7d32; margin: 15px 0;">00:00</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                <button onclick="runTimer(5)" style="background:#4caf50;">5 خولەک</button>
+                <button onclick="runTimer(10)" style="background:#4caf50;">10 خولەک</button>
+                <button onclick="runTimer(15)" style="background:#4caf50;">15 خولەک</button>
+                <button onclick="runTimer(20)" style="background:#4caf50;">20 خولەک</button>
+                <button onclick="runTimer(25)" style="background:#4caf50;">25 خولەک</button>
+                <button onclick="runTimer(30)" style="background:#4caf50;">30 خولەک</button>
+            </div>
+            <button onclick="resetTimer()" style="width:100%; margin-top:10px; background:#f44336;">ڕاگرتنی كات</button>
+        </div>
+        <div class="modal-footer">
+            <button class="close-btn" onclick="toggleTimeModal()">داخستن</button>
+        </div>
+    </div>
+</div>
 
     <div class="header">
         <div class="h-right" id="clock">...</div>
@@ -309,6 +353,14 @@ async function updateMarket() {
         document.getElementById('oil-wti').innerText = `⛽ تەکساس: $${wti.toFixed(2)}`;
         document.getElementById('oil-opec').innerText = `🌍 ئۆپێک: $${opec.toFixed(2)}`;
         document.getElementById('oil-basra').innerText = `🇮🇶 بەسڕە: $${(brent - 2.50).toFixed(2)}`;
+
+        const drop = document.getElementById("mDrop");
+        drop.classList.add("show"); 
+        showStatus("📊 نرخەکان نوێبوونەوە"); 
+
+        setTimeout(() => {
+            drop.classList.remove("show");
+        }, 6000); 
     } catch (e) {}
 }
 
@@ -338,6 +390,9 @@ function initApp() {
         document.getElementById('clock').innerText = `${days[n.getDay()]} ${n.toLocaleTimeString('en-GB',{hour12:false})}`;
     }, 1000);
 
+    // گرێدانی کاتژمێرەکە بە پەنجەرە نوێیەکە
+    document.getElementById('clock').onclick = toggleTimeModal;
+
     updateWeather();
     setInterval(updateWeather, 1800000);
 
@@ -349,9 +404,11 @@ function initApp() {
         const aboutModal = document.getElementById("aboutModal");
         const fontModal = document.getElementById("fontModal");
         const c4kModal = document.getElementById("c4kModal");
+        const timeModal = document.getElementById("timeModal");
         if (event.target == aboutModal) aboutModal.style.display = "none";
         if (event.target == fontModal) fontModal.style.display = "none";
         if (event.target == c4kModal) c4kModal.style.display = "none";
+        if (event.target == timeModal) timeModal.style.display = "none";
     }
 }
 
@@ -369,7 +426,7 @@ function toggleC4kModal() {
 }
 function toggleM() { document.getElementById("mDrop").classList.toggle("show"); }
 function toggleT() { document.body.classList.toggle('dark-mode'); }
-function showStatus(m) { const s = document.getElementById("status"); s.innerText=m; s.style.display="block"; setTimeout(() => s.style.display = "none", 2000); }
+function showStatus(m) { const s = document.getElementById("status"); s.innerText=m; s.style.display="block"; setTimeout(() => s.style.display = "none", 5000); }
 function copyText() {
     const textarea = document.getElementById("textBox");
     const start = textarea.selectionStart;
@@ -386,8 +443,82 @@ function clearText() {
     if (textBox.value !== "") {
         textBox.value = ""; 
         updateStats(); 
-        showStatus("🗑️ دەقەکە بە سەرکەوتوویی سڕایەوە");
+        showStatus("🗑️ دەقەکە سڕایەوە");
     }
+}
+
+let timerRef; 
+
+function toggleTimeModal() {
+    const m = document.getElementById("timeModal");
+    m.style.display = (m.style.display === "block") ? "none" : "block";
+    if(m.style.display === "block") showFullDates();
+}
+
+function showFullDates()
+ {
+const n = new Date();
+  // لیستی ناوی مانگە کوردییەکان (بۆ ئەوەی دڵنیابین ڕێک وەک خۆی دەردەچێت)
+    const kurdishMonths = [
+        "کانوونی دووەم", "شوبات", "ئادار", "نیسان", "ئایار", "حوزەیران", 
+        "تەممووز", "ئاب", "ئەیلوول", "تشرینی یەکەم", "تشرینی دووەم", "کانوونی یەکەم"
+    ];
+
+    // ڕێکخستنی بەرواری زایینی: ١١ی شوباتی ٢٠٢٦
+    const dayG = n.getDate();
+    const monthG = kurdishMonths[n.getMonth()]; // وەرگرتنی ناوەکە لە لیستەکەدا
+    const yearG = n.getFullYear();
+    const g = dayG + "ی " + monthG + "ی " + yearG;
+    
+    // حیسابکردنی بەرواری کۆچی
+    let day = n.getDate();
+    let month = n.getMonth();
+    let year = n.getFullYear();
+    if (year < 1900) year += 1900;
+    let m = month + 1;
+    let y = year;
+    if (m < 3) { y -= 1; m += 12; }
+    let a = Math.floor(y / 100);
+    let b = 2 - a + Math.floor(a / 4);
+    let jd = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + day + b - 1524;
+    let z = jd - 1948440;
+    let i_year = Math.floor((z - 1) / 354.367);
+    let i_month = Math.floor((z - Math.floor(i_year * 354.367) - 0.5) / 29.5);
+    let i_day = Math.floor(z - Math.floor(i_year * 354.367) - Math.floor(i_month * 29.5));
+    i_year += 1;
+    i_month += 1;
+    
+    const islamicMonths = ["مورەڕەم", "سەفەر", "ڕەبیع ئەوەل", "ڕەبیع سانی", "جەمادی ئەوەل", "جەمادی سانی", "ڕەجەب", "شەعبان", "ڕەمەزان", "شەووال", "زولقەعدە", "زولحیججە"];
+    const i = i_day + "ی " + islamicMonths[i_month - 1] + "ی " + i_year;
+    
+    document.getElementById('gregorianDate').innerText = "📅 زایینی: " + g;
+    document.getElementById('islamicDate').innerText = "🌙 کۆچی: " + i;
+}
+
+function runTimer(minutes) {
+    clearInterval(timerRef);
+    let seconds = minutes * 60;
+    showStatus("⏰ كات بۆ " + minutes + " خولەک دانرا");
+    
+    timerRef = setInterval(() => {
+        seconds--;
+        let m = Math.floor(seconds / 60);
+        let s = seconds % 60;
+        document.getElementById('timerDisplay').innerText = 
+            (m < 10 ? "0"+m : m) + ":" + (s < 10 ? "0"+s : s);
+            
+        if (seconds <= 0) {
+            clearInterval(timerRef);
+            alert("🔔 ئه‌و كاته‌ی كه‌ داتنابوو؛ ته‌واو بوو!");
+            document.getElementById('timerDisplay').innerText = "00:00";
+        }
+    }, 1000);
+}
+
+function resetTimer() {
+    clearInterval(timerRef);
+    document.getElementById('timerDisplay').innerText = "00:00";
+    showStatus("⏹️ كات ڕاگیرا");
 }
 </script>
 </body>
